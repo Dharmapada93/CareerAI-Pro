@@ -108,3 +108,4 @@ When editing a resume under `/dashboard/resume/[id]`, type a simple accomplishme
 
 ### Exporting Resumes to PDF
 We utilize a clean `@media print` stylesheet. Click **Export PDF** in the resume builder to launch the print menu. All UI margins, navigation tabs, sidebars, and editing boxes will be hidden, outputting a standard single or multi-page A4 document structure.
+
