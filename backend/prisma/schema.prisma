@@ -1,0 +1,166 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                String             @id @default(uuid())
+  name              String
+  email             String             @unique
+  password          String
+  role              String             @default("user") // "user" | "admin"
+  subscription      String             @default("Free") // "Free" | "Pro" | "Enterprise"
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  resumes           Resume[]
+  atsReports        ATSReport[]
+  interviewSessions InterviewSession[]
+  coverLetters      CoverLetter[]
+  portfolios        Portfolio[]
+  jobApplications   JobApplication[]
+  aiUsageLogs       AIUsageLog[]
+  feedbacks         Feedback[]
+}
+
+model Resume {
+  id           String          @id @default(uuid())
+  userId       String
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String          @default("Untitled Resume")
+  templateId   String          @default("modern")
+  personalInfo Json            // { name, email, phone, github, linkedin, website, summary }
+  education    Json            // Array of { school, degree, fieldOfStudy, startDate, endDate, description }
+  experience   Json            // Array of { company, position, location, startDate, endDate, current, description }
+  projects     Json            // Array of { title, role, description, url, technologies }
+  skills       Json            // Array of strings
+  certificates Json            // Array of { name, issuer, date, url }
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  atsReports   ATSReport[]
+  versions     ResumeVersion[]
+}
+
+model ResumeTemplate {
+  id         String   @id @default(uuid())
+  name       String
+  desc       String
+  popular    Boolean  @default(false)
+  layoutData Json?
+  createdAt  DateTime @default(now())
+}
+
+model ResumeVersion {
+  id            String   @id @default(uuid())
+  resumeId      String
+  resume        Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  versionNumber Int
+  title         String
+  templateId    String
+  personalInfo  Json
+  education     Json
+  experience    Json
+  projects      Json
+  skills        Json
+  certificates  Json
+  createdAt     DateTime @default(now())
+}
+
+model ATSReport {
+  id                    String   @id @default(uuid())
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resumeId              String?
+  resume                Resume?  @relation(fields: [resumeId], references: [id], onDelete: SetNull)
+  jobDescription        String
+  score                 Int
+  missingKeywords       Json     // Array of strings
+  formattingSuggestions Json     // Array of strings
+  skillGapAnalysis      Json     // Array of strings
+  improvementTips       Json     // Array of strings
+  createdAt             DateTime @default(now())
+}
+
+model InterviewSession {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role            String
+  experienceLevel String
+  questions       Json     // Array of QuestionResponse { question, answer, feedback, scores: { technical, communication, confidence }, improvedAnswer }
+  overallFeedback String?  @default("")
+  overallScores   Json     // { technical, communication, confidence }
+  status          String   @default("pending") // "pending" | "completed"
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model CoverLetter {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName String
+  role        String
+  content     String
+  createdAt   DateTime @default(now())
+}
+
+model Portfolio {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  slug        String   @unique
+  theme       String   @default("dark")
+  content     Json     // { heroTitle, heroSubtitle, aboutMe, projectSubtitles }
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model JobApplication {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  company     String
+  status      String   @default("Applied") // "Applied" | "Interview" | "Selected" | "Rejected"
+  appliedDate DateTime @default(now())
+  notes       String?  @default("")
+  checklist   Json     // Array of { text, completed }
+  reminders   Json     // Array of Dates
+  emails      Json     // Array of { subject, body, sentAt }
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AIUsageLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  details   String
+  ipAddress String?  @default("")
+  userAgent String?  @default("")
+  createdAt DateTime @default(now())
+}
+
+model SubscriptionPlan {
+  id        String   @id @default(uuid())
+  name      String   // "Free" | "Pro" | "Enterprise"
+  price     Float
+  features  Json     // Array of strings
+  createdAt DateTime @default(now())
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   @default("feedback") // "bug" | "feature" | "feedback"
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}

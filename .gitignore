@@ -1,0 +1,40 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies and virtual environments
+node_modules/
+**/node_modules/
+.venv/
+**/venv/
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# Next.js and frontend builds
+.next/
+**/dist/
+**/build/
+**/out/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+coverage/
+
+# local env files and secrets
+.env*.local
+.env
+.env.production
+.env.development
+*.pem
+
+# misc
+.DS_Store
+.vscode/
+.idea/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
