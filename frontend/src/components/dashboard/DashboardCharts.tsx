@@ -62,8 +62,8 @@ export function DashboardCharts({ atsHistory, interviewMetrics }: ChartsProps) {
             </span>
           )}
         </div>
-        <div className="h-72 w-full">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="relative h-72 w-full min-w-0">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <AreaChart data={atsChartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="atsGlow" x1="0" y1="0" x2="0" y2="1">
@@ -88,7 +88,7 @@ export function DashboardCharts({ atsHistory, interviewMetrics }: ChartsProps) {
           </ResponsiveContainer>
         </div>
       </motion.div>
-
+ 
       {/* AI Mock Interview Radar Chart */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -107,8 +107,8 @@ export function DashboardCharts({ atsHistory, interviewMetrics }: ChartsProps) {
             </span>
           )}
         </div>
-        <div className="h-72 w-full flex items-center justify-center">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="relative h-72 w-full min-w-0 flex items-center justify-center">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
               <PolarGrid stroke="rgba(139, 92, 246, 0.08)" />
               <PolarAngleAxis dataKey="subject" stroke="rgba(148, 163, 184, 0.7)" fontSize={11} />

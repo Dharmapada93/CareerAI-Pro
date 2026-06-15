@@ -1,44 +1,15 @@
 {
-  "name": "careerai-pro",
-  "version": "0.1.0",
+  "name": "careerai-premium-pro",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "bcryptjs": "^3.0.3",
-    "bullmq": "^5.78.0",
-    "canvas-confetti": "^1.9.4",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.40.0",
-    "jszip": "^3.10.1",
-    "lucide-react": "^1.17.0",
-    "mongoose": "^9.7.0",
-    "next": "14.2.3",
-    "next-auth": "^4.24.14",
-    "react": "^18",
-    "react-dom": "^18",
-    "recharts": "^3.8.1",
-    "redis": "^6.0.0",
-    "tailwind-merge": "^3.6.0",
-    "three": "^0.184.0",
-    "zod": "^4.4.3",
-    "zustand": "^5.0.14"
+    "dev": "concurrently \"npm run dev:ai\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:ai": "cd ai-service && .venv\\Scripts\\python main.py",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install-all": "npm install && cd backend && npm install --legacy-peer-deps && cd ../frontend && npm install"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/canvas-confetti": "^1.9.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@types/three": "^0.184.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "concurrently": "^8.2.2"
   }
 }

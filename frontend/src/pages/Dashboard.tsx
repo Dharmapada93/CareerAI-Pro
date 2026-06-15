@@ -257,7 +257,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <Link
-                    to={`/dashboard/resume`}
+                    to={`/dashboard/resume/${r._id}`}
                     className="p-2 rounded-xl bg-slate-100 hover:bg-brand-500 dark:bg-slate-800 dark:hover:bg-brand-600 text-slate-550 dark:text-slate-400 hover:text-white dark:hover:text-white transition"
                     title="Edit Resume"
                   >

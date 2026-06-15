@@ -56,8 +56,8 @@ export function AdminCharts({ counts, subscriptions }: AdminChartsProps) {
         className="glass-panel p-6 rounded-3xl bg-white/70 dark:bg-dark-350/70"
       >
         <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 mb-4">Activity Interactions</h3>
-        <div className="h-72 w-full">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="relative h-72 w-full min-w-0">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <BarChart data={activityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(139, 92, 246, 0.05)" />
               <XAxis dataKey="name" stroke="rgba(148, 163, 184, 0.5)" fontSize={11} tickLine={false} />
@@ -76,7 +76,7 @@ export function AdminCharts({ counts, subscriptions }: AdminChartsProps) {
           </ResponsiveContainer>
         </div>
       </motion.div>
-
+ 
       {/* Subscriptions Pie Chart */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -84,8 +84,8 @@ export function AdminCharts({ counts, subscriptions }: AdminChartsProps) {
         className="glass-panel p-6 rounded-3xl bg-white/70 dark:bg-dark-350/70"
       >
         <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 mb-4">User Subscription Layout</h3>
-        <div className="h-72 w-full flex items-center justify-center">
-          <ResponsiveContainer width="100%" height="100%">
+        <div className="relative h-72 w-full min-w-0 flex items-center justify-center">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
             <PieChart>
               <Pie
                 data={subData}

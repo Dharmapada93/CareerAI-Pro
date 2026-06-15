@@ -156,28 +156,91 @@ export function PremiumNavbar() {
                   <Link
                     to="/dashboard"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-500/10 dark:text-slate-300 transition"
+                    className="flex items-center space-x-2 px-3 py-2 rounded-xl text-base font-bold text-slate-800 dark:text-slate-100 bg-brand-500/5"
                   >
-                    <LayoutDashboard className="w-5 h-5" />
-                    <span>Dashboard</span>
+                    <LayoutDashboard className="w-5 h-5 text-brand-500" />
+                    <span>Dashboard Overview</span>
                   </Link>
+
+                  {/* Dashboard Sub-links section */}
+                  <div className="pl-6 pt-1 border-l-2 border-brand-500/20 space-y-2 text-left">
+                    <span className="block text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
+                      Tools & Services
+                    </span>
+                    <Link
+                      to="/dashboard/resume"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      Resume Builder
+                    </Link>
+                    <Link
+                      to="/dashboard/ats"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      ATS Score Checker
+                    </Link>
+                    <Link
+                      to="/dashboard/interview"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      AI Mock Interview
+                    </Link>
+                    <Link
+                      to="/dashboard/career-coach"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      AI Career Coach
+                    </Link>
+                    <Link
+                      to="/dashboard/job-tracker"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      AI Job Tracker
+                    </Link>
+                    <Link
+                      to="/dashboard/cover-letter"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      Cover Letter
+                    </Link>
+                    <Link
+                      to="/dashboard/portfolio"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      Portfolio Builder
+                    </Link>
+                    <Link
+                      to="/dashboard/profile"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      My Profile
+                    </Link>
+                    <Link
+                      to="/dashboard/settings"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-1.5 text-sm font-medium text-slate-650 dark:text-slate-350 hover:text-brand-500 transition"
+                    >
+                      Settings
+                    </Link>
+                  </div>
+
                   {user.role === "admin" && (
                     <Link
                       to="/admin"
                       onClick={() => setIsOpen(false)}
-                      className="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-500/10 dark:text-slate-300 transition"
+                      className="block px-3 py-2 rounded-xl text-base font-semibold text-purple-650 dark:text-purple-400 hover:bg-purple-500/10 transition text-left"
                     >
-                      Admin
+                      Admin Console
                     </Link>
                   )}
-                  <Link
-                    to="/dashboard/profile"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-500/10 dark:text-slate-300 transition"
-                  >
-                    <UserIcon className="w-5 h-5 text-brand-500" />
-                    <span>{user.name}</span>
-                  </Link>
                   <button
                     onClick={() => {
                       setIsOpen(false);
